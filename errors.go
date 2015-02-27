@@ -27,9 +27,8 @@ type invalidNumArgs struct {
 func (i invalidNumArgs) Error() string {
 	if i.variadic {
 		return fmt.Sprintf("function %s: expecting %d (or more) arguments, got %d", i.name, i.expecting, i.got)
-	} else {
-		return fmt.Sprintf("function %s: expecting %d arguments, got %d", i.name, i.expecting, i.got)
 	}
+	return fmt.Sprintf("function %s: expecting %d arguments, got %d", i.name, i.expecting, i.got)
 }
 
 type invalidArgType struct {

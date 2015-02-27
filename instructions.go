@@ -1,10 +1,13 @@
 package instructions
 
 import (
-	"github.com/MJKWoolnough/tokeniser"
 	"io"
+
+	"github.com/MJKWoolnough/tokeniser"
 )
 
+// New creates a new instruction parser from the given struct - exported
+// methods on which will be turned into instructions
 func New(functionStruct interface{}, data io.Reader) ([]Function, error) {
 	f := make(functions)
 
@@ -43,7 +46,9 @@ func New(functionStruct interface{}, data io.Reader) ([]Function, error) {
 
 		switch token.Typ {
 		case FUNCTION:
-			funcToken = token
+			if token.Val != "" {
+				funcToken = token
+			}
 		case COMMENT:
 			token.Typ = STRING
 			function, err := f.bind("Comment", token)

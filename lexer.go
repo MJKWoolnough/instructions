@@ -2,6 +2,7 @@ package instructions
 
 import "github.com/MJKWoolnough/tokeniser"
 
+// Token Types
 const (
 	FUNCTION tokeniser.ItemType = iota
 	COMMENT

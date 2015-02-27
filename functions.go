@@ -2,8 +2,9 @@ package instructions
 
 import (
 	"fmt"
-	"github.com/MJKWoolnough/tokeniser"
 	"reflect"
+
+	"github.com/MJKWoolnough/tokeniser"
 )
 
 var errType = reflect.TypeOf((*error)(nil)).Elem()
@@ -107,6 +108,7 @@ func (f functions) bind(name string, args ...*tokeniser.Item) (Function, error) 
 	return fp, nil
 }
 
+// Function is used to interface the instructions to the methods
 type Function interface {
 	Call() error
 	Name() string
