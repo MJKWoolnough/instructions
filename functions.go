@@ -3,8 +3,6 @@ package instructions
 import (
 	"fmt"
 	"reflect"
-
-	"github.com/MJKWoolnough/tokeniser"
 )
 
 var errType = reflect.TypeOf((*error)(nil)).Elem()
@@ -75,7 +73,7 @@ func (f functions) add(name string, fn reflect.Value) error {
 	return nil
 }
 
-func (f functions) bind(name string, args ...*tokeniser.Item) (Function, error) {
+func (f functions) bind(name string, args ...token) (Function, error) {
 	fd, ok := f[name]
 	if !ok {
 		return nil, &noFunction{
@@ -99,7 +97,7 @@ func (f functions) bind(name string, args ...*tokeniser.Item) (Function, error) 
 		if j >= len(fd.arguments) {
 			j = len(fd.arguments) - 1
 		}
-		err := fd.arguments[j].Set(args[i].Val)
+		err := fd.arguments[j].Set(args[i].data)
 		if err != nil {
 			return nil, err
 		}

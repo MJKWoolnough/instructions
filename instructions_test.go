@@ -2,7 +2,7 @@ package instructions
 
 import (
 	"fmt"
-	"github.com/MJKWoolnough/memio"
+	"strings"
 	"testing"
 )
 
@@ -33,11 +33,11 @@ func (i *instructs) Func6(arg1 string, arg2 ...float32) {
 }
 
 func TestInstructions(t *testing.T) {
-	str := []byte("Func1\nFunc2 \"abcxyz\"\nFunc2 \"ABCXYZ\"\nFunc3 \"123\", \"456\"\nFunc3 \"456\", \"123\"\nFunc4 14513, 0x7f\nFunc5 72, 101, 108, 0x6c, 0x6f\nFunc6 \"Beep\", 3.14159, 1.618\n")
+	str := "Func1\nFunc2 \"abcxyz\"\nFunc2 \"ABCXYZ\"\nFunc3 \"123\" \"456\"\nFunc3 \"456\" \"123\"\nFunc4 14513 0x7f\nFunc5 72 101 108 0x6c 0x6f\nFunc6 \"Beep\" 3.14159 1.618\n"
 
 	data := new(instructs)
 
-	ins, err := New(data, memio.Open(str))
+	ins, err := New(data, strings.NewReader(str))
 
 	if err != nil {
 		fmt.Println(ins)
@@ -57,7 +57,6 @@ func TestInstructions(t *testing.T) {
 		{"Func5", "Hello"},
 		{"Func6", "Beep - [3.14159 1.618]"},
 	}
-
 	if len(tests) != len(ins) {
 		t.Errorf("expecting %d instructions, got %d", len(tests), len(ins))
 		return
