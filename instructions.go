@@ -6,12 +6,12 @@ import (
 	"github.com/MJKWoolnough/tokeniser"
 )
 
-// New creates a new instruction parser from the given struct - exported
+// New creates a new instruction parser from the given value - exported
 // methods on which will be turned into instructions
-func New(functionStruct interface{}, data io.Reader) ([]Function, error) {
+func New(functionObj interface{}, data io.Reader) ([]Function, error) {
 	f := make(functions)
 
-	err := f.AddFunctions(functionStruct)
+	err := f.AddFunctions(functionObj)
 	if err != nil {
 		return nil, err
 	}
