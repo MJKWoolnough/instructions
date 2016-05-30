@@ -163,7 +163,6 @@ func (l *lexer) errorFn() (token, stateFn) {
 }
 
 // Errors
-
 var (
 	ErrInvalidEscape = errors.New("invalid escape character")
 	ErrInvalidNumber = errors.New("invalid number format")
