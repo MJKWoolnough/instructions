@@ -8,8 +8,8 @@ import (
 )
 
 func TestTokens(t *testing.T) {
-	str := []byte("Hello\nWorld 1 2 3\n#Comment 3 5 7 1\nBeep \"This is a String\" 5.4\n#Comment 1\n")
-	tokens := newLexer(memio.Open(str))
+	str := memio.Buffer("Hello\nWorld 1 2 3\n#Comment 3 5 7 1\nBeep \"This is a String\" 5.4\n#Comment 1\n")
+	tokens := newLexer(&str)
 	tests := []token{
 		{tokenFunction, "Hello"},
 		{tokenFunction, "World"},
