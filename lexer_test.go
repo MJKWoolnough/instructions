@@ -4,7 +4,7 @@ import (
 	"io"
 	"testing"
 
-	"github.com/MJKWoolnough/memio"
+	"vimagination.zapto.org/memio"
 )
 
 func TestTokens(t *testing.T) {

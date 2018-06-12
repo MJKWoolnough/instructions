@@ -1,4 +1,4 @@
-package instructions
+package instructions // import "vimagination.zapto.org/instructions"
 
 import "io"
 
