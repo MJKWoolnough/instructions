@@ -2,47 +2,48 @@ package instructions
 
 import "fmt"
 
-type noFunction struct {
+type noFunctionError struct {
 	functionName string
 }
 
-func (n noFunction) Error() string {
+func (n noFunctionError) Error() string {
 	return "function not found: " + n.functionName
 }
 
-type duplicateFunction struct {
+type duplicateFunctionError struct {
 	functionName string
 }
 
-func (d duplicateFunction) Error() string {
+func (d duplicateFunctionError) Error() string {
 	return "function already exists: " + d.functionName
 }
 
-type invalidNumArgs struct {
+type invalidNumArgsError struct {
 	name           string
 	variadic       bool
 	expecting, got int
 }
 
-func (i invalidNumArgs) Error() string {
+func (i invalidNumArgsError) Error() string {
 	if i.variadic {
 		return fmt.Sprintf("function %s: expecting %d (or more) arguments, got %d", i.name, i.expecting, i.got)
 	}
+
 	return fmt.Sprintf("function %s: expecting %d arguments, got %d", i.name, i.expecting, i.got)
 }
 
-type invalidArgType struct {
+type invalidArgTypeError struct {
 	expecting, got string
 }
 
-func (i invalidArgType) Error() string {
+func (i invalidArgTypeError) Error() string {
 	return "expecting argument of type " + i.expecting + ", got " + i.got
 }
 
-type invalidMethod struct {
+type invalidMethodError struct {
 	methodName string
 }
 
-func (i invalidMethod) Error() string {
+func (i invalidMethodError) Error() string {
 	return "method did not meet requirements: " + i.methodName
 }

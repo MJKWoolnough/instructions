@@ -14,6 +14,7 @@ type stringT string
 
 func (s *stringT) Set(a string) error {
 	*s = stringT(a)
+
 	return nil
 }
 
@@ -28,6 +29,7 @@ type intT struct {
 
 func (i *intT) Set(a string) (err error) {
 	i.number, err = strconv.ParseInt(a, 0, i.bitSize)
+
 	return err
 }
 
@@ -42,6 +44,7 @@ func (i *intT) Get() reflect.Value {
 	case 32:
 		return reflect.ValueOf(int32(i.number))
 	}
+
 	return reflect.ValueOf(i.number)
 }
 
@@ -52,6 +55,7 @@ type uintT struct {
 
 func (u *uintT) Set(a string) (err error) {
 	u.number, err = strconv.ParseUint(a, 0, u.bitSize)
+
 	return err
 }
 
@@ -66,6 +70,7 @@ func (u *uintT) Get() reflect.Value {
 	case 32:
 		return reflect.ValueOf(uint32(u.number))
 	}
+
 	return reflect.ValueOf(u.number)
 }
 
@@ -76,6 +81,7 @@ type floatT struct {
 
 func (f *floatT) Set(a string) (err error) {
 	f.number, err = strconv.ParseFloat(a, f.bitSize)
+
 	return err
 }
 
@@ -83,5 +89,6 @@ func (f *floatT) Get() reflect.Value {
 	if f.bitSize == 32 {
 		return reflect.ValueOf(float32(f.number))
 	}
+
 	return reflect.ValueOf(f.number)
 }
