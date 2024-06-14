@@ -45,14 +45,14 @@ type token struct {
 }
 
 type lexer struct {
-	p     parser.Parser
+	p     parser.Tokeniser
 	state stateFn
 	err   error
 }
 
 func newLexer(r io.Reader) *lexer {
 	l := &lexer{
-		p: parser.NewReaderParser(r),
+		p: parser.NewReaderTokeniser(r),
 	}
 	l.state = l.lexFunction
 	return l
@@ -64,7 +64,7 @@ func (l *lexer) GetToken() (token, error) {
 	}
 	var t token
 	t, l.state = l.state()
-	//l.p.Get()
+	// l.p.Get()
 	if l.err == io.EOF {
 		if t.typ == tokenError {
 			l.err = io.ErrUnexpectedEOF
